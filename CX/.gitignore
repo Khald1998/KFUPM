@@ -1,5 +1,0 @@
-.terraform
-.terraform.lock.hcl
-func.zip
-terraform.tfstate
-terraform.tfstate.backup
