@@ -9,8 +9,9 @@ terraform {
     }
   }
 }
-provider "aws" {
-}
+# provider "aws" {
+# }
+
 provider "docker" {
 
 }
