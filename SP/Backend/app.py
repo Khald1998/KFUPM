@@ -11,6 +11,8 @@ from temperature import *
 from humidity import *
 from disease import *
 from getData import *
+from randomNumber import *
+
 
 
 if __name__ == "__main__":

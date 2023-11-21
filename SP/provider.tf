@@ -13,5 +13,9 @@ terraform {
 # }
 
 provider "docker" {
-
+  registry_auth {
+    address  = local.ecr_address
+    username = data.aws_ecr_authorization_token.main.user_name
+    password = data.aws_ecr_authorization_token.main.password
+  }
 }
