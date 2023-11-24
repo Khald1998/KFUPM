@@ -5,11 +5,14 @@ import random
 @app.route('/random', methods=['GET'])
 
 def random_number():
-    # Generate a random number, for example between 1 and 100
-    random_number = random.randint(1, 100)
+    random_number_one = random.randint(0, 1)
+    random_number_two = random.randint(0, 1)
+    random_number_three = random.randint(0, 1)
 
     data = {
-        "number": random_number,
+        "number_one": random_number_one,
+        "number_two": random_number_two,
+        "number_three": random_number_three,
     }
 
     return jsonify(data)

@@ -75,7 +75,12 @@ resource "aws_security_group" "instance" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
   egress {
     from_port   = 0
     to_port     = 0
@@ -151,22 +156,22 @@ resource "aws_ecs_task_definition" "demo-ecs-task-definition" {
       hostPort      = 8080
     }]
   }])
-
-
 }
 
 
-# resource "aws_ecs_service" "demo-ecs-service" {
-#   name            = "backend-app"
-#   cluster         = aws_ecs_cluster.demo-ecs-cluster.id
-#   task_definition = aws_ecs_task_definition.demo-ecs-task-definition.arn
-#   launch_type     = "FARGATE"
-#   network_configuration {
-#     subnets          = [aws_subnet.public_1.id]
-#     assign_public_ip = true
-#   }
-#   desired_count = 1
-# }
+resource "aws_ecs_service" "demo-ecs-service" {
+  name            = "backend-app"
+  cluster         = aws_ecs_cluster.demo-ecs-cluster.id
+  task_definition = aws_ecs_task_definition.demo-ecs-task-definition.arn
+  launch_type     = "FARGATE"
+  network_configuration {
+    subnets          = [aws_subnet.public_1.id]
+    security_groups = [aws_security_group.instance.id]
+
+    assign_public_ip = true
+  }
+  desired_count = 1
+}
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {
   name = "ecsTaskExecutionRole"

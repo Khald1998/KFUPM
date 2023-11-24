@@ -12,6 +12,13 @@ from humidity import *
 from disease import *
 from getData import *
 from randomNumber import *
+from microcontrollerPOST import *
+from microcontrollerGET import *
+from pinsPOST import *
+from pinsGET import *
+
+
+
 
 
 
