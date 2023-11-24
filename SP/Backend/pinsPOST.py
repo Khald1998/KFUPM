@@ -75,5 +75,6 @@ def pinsPOST():
     # pin_D20 = 1 #LCD I2C SDA 
     # pin_D21 = 1 #LCD I2C SLA 
 
-    # Potentiometer 1: A11
-    # Potentiometer 2: A12
+    # pin_A11 = 1 #Potentiometer 
+    # pin_A12 = 1 #Potentiometer 
+
