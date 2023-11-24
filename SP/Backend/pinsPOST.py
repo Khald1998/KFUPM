@@ -61,8 +61,8 @@ def pinsPOST():
     # pin_D12 = 1 #heater (OUTPUT)
 
     # pin_D46 = 1 #DHT11 (air temp)
-    # pin_D48 = 1 #DS18b20 (inner water)
-    # pin_D50 = 1 #DS18b20 (outer water)
+    # pin_D48 = 1 #DS18b20 (inner water temp)
+    # pin_D50 = 1 #DS18b20 (outer water temp)
     # pin_D52 = 1 #IR sender
     # pin_D53 = 1 #IR receiver
     # pin_A8 = 1 #LDR 1
