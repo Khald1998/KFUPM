@@ -71,3 +71,6 @@ def pinsPOST():
 
     # pin_D20 = 1 #SDA 
     # pin_D21 = 1 #SLA 
+
+    # Potentiometer 1: A11
+    # Potentiometer 2: A12
