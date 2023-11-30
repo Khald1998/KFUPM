@@ -43,14 +43,15 @@ def pinsGET():
 
 
 
-    # pin_D22 = 1 #relay (OUTPUT)
-    # pin_D24 = 1 #relay (OUTPUT)
-    # pin_D26 = 1 #relay (OUTPUT)
-    # pin_D28 = 1 #relay (OUTPUT)
-    # pin_D2 = 1 #relay (OUTPUT)
-    # pin_D3 = 1 #relay (OUTPUT)
-    # pin_D4 = 1 #relay (OUTPUT)
-    # pin_D5 = 1 #relay (OUTPUT)
+
+    # pin_D22 = 1 #relay Pump (OUTPUT)
+    # pin_D24 = 1 #relay Pump (OUTPUT)
+    # pin_D26 = 1 #relay Pump (OUTPUT)
+    # pin_D28 = 1 #relay Pump (OUTPUT)
+    # pin_D2 = 1 #relay Pump (OUTPUT)
+    # pin_D3 = 1 #relay Pump (OUTPUT)
+    # pin_D4 = 1 #relay Pump (OUTPUT)
+    # pin_D5 = 1 #relay Light (OUTPUT)
 
     # pin_D32 = 1 #Echo 
     # pin_D34 = 1 #Trig 
@@ -66,8 +67,8 @@ def pinsGET():
     # pin_D12 = 1 #heater (OUTPUT)
 
     # pin_D46 = 1 #DHT11 (air temp)
-    # pin_D48 = 1 #DS18b20 (inner water)
-    # pin_D50 = 1 #DS18b20 (outer water)
+    # pin_D48 = 1 #DS18b20 (inner water temp)
+    # pin_D50 = 1 #DS18b20 (outer water temp)
     # pin_D52 = 1 #IR sender
     # pin_D53 = 1 #IR receiver
     # pin_A8 = 1 #LDR 1
@@ -76,8 +77,9 @@ def pinsGET():
     # pin_A13 = 1 #LDR 4
     # pin_A14 = 1 #LDR 5
 
-    # pin_D20 = 1 #SDA 
-    # pin_D21 = 1 #SLA 
+    # pin_D20 = 1 #LCD I2C SDA 
+    # pin_D21 = 1 #LCD I2C SLA 
 
-    # pin_A11 = 1 #potentiometer
-    # pin_A12 = 1 #potentiometer
+    # pin_A11 = 1 #Potentiometer 
+    # pin_A12 = 1 #Potentiometer 
+
