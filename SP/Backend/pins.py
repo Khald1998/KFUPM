@@ -1,5 +1,8 @@
 from app import app, mongo
 from flask import jsonify, request
+from flask_socketio import SocketIO
+
+socketio = SocketIO(app)
 
 @app.route('/pinsPOST', methods=['POST'])
 def pinsPOST():
