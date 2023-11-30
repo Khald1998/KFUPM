@@ -7,16 +7,10 @@ mongo = PyMongo(app)
 
 # Import the routes to register them with the app
 from root import *
-from temperature import *
-from humidity import *
 from disease import *
-from getData import *
-from randomNumber import *
-from microcontrollerPOST import *
-from microcontrollerGET import *
-from pinsPOST import *
-from pinsGET import *
-
+from microcontroller import *
+from test import *
+from pins import *
 
 
 
