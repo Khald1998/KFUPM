@@ -7,6 +7,10 @@ terraform {
       source  = "kreuzwerker/docker"
       # version = ">= 2.12, < 3.0" //docker latest version is broken
     }
+    cloudflare = {
+      source  = "cloudflare/cloudflare"
+    }
+
   }
 }
 # provider "aws" {

@@ -56,13 +56,6 @@ resource "aws_security_group" "instance" {
   name   = "shh"
   vpc_id = aws_vpc.main.id
 
-  ingress { //shh
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
   ingress { 
     from_port   = 80
     to_port     = 80
@@ -73,12 +66,6 @@ resource "aws_security_group" "instance" {
     from_port   = 8080
     to_port     = 8080
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-  ingress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
   egress {
@@ -126,9 +113,16 @@ resource "docker_registry_image" "backend" {
 }
 
 # ########
+# Log 
+# ########
+resource "aws_cloudwatch_log_group" "my_log_group" {
+  name              = "/ecs/my-log-group"
+  retention_in_days = 30  # You can adjust this value as needed
+}
+
+# ########
 # run container 
 # ########
-data "aws_caller_identity" "current" {}
 
 resource "aws_ecs_cluster" "demo-ecs-cluster" {
   name = "ecs-cluster-backend"
@@ -142,21 +136,32 @@ resource "aws_ecs_task_definition" "demo-ecs-task-definition" {
   requires_compatibilities = ["FARGATE"]
   memory                   = "1024"
   cpu                      = "512"
-  execution_role_arn       = "${aws_iam_role.ecsTaskExecutionRole.arn}"
+  execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
   container_definitions    = jsonencode([{
-    name      = "demo-container",
-    image     = aws_ecr_repository.main.repository_url,
-    memory    = 1024,
-    cpu       = 512,
-    essential = true,
-    entryPoint = ["python"],
-    command    = ["app.py"],
-    portMappings = [{
-      containerPort = 8080,
+    name          = "demo-container"
+    image         = aws_ecr_repository.main.repository_url
+    memory        = 1024
+    cpu           = 512
+    essential     = true
+    entryPoint    = ["python"]
+    command       = ["app.py"]
+    portMappings  = [{
+      containerPort = 8080
       hostPort      = 8080
     }]
+  logConfiguration = {
+    logDriver = "awslogs"
+    options = {
+      "awslogs-create-group" = "true"
+      "awslogs-group" = aws_cloudwatch_log_group.my_log_group.name
+      "awslogs-region" = "me-south-1"
+      "awslogs-stream-prefix" = "ecs"
+    }
+  }
+
   }])
 }
+
 
 
 resource "aws_ecs_service" "demo-ecs-service" {
@@ -170,8 +175,14 @@ resource "aws_ecs_service" "demo-ecs-service" {
 
     assign_public_ip = true
   }
+
   desired_count = 1
 }
+
+
+# ########
+# IAM  
+# ########
 
 resource "aws_iam_role" "ecsTaskExecutionRole" {
   name = "ecsTaskExecutionRole"
@@ -194,3 +205,34 @@ resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
+
+resource "aws_iam_policy" "ecs_logs_policy" {
+  name        = "ecsLogsPolicy"
+  path        = "/"
+  description = "Policy for ECS tasks to log to CloudWatch Logs"
+
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:CreateLogGroup"
+        ],
+        Resource = "arn:aws:logs:*:*:*",
+        Effect   = "Allow"
+      }
+    ]
+  })
+}
+resource "aws_iam_role_policy_attachment" "ecs_logs_policy_attachment" {
+  role       = aws_iam_role.ecsTaskExecutionRole.name
+  policy_arn = aws_iam_policy.ecs_logs_policy.arn
+}
+
+# ########
+# Domain 
+# ########
+
+
