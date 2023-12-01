@@ -52,3 +52,13 @@ pin_D21 = 1 #LCD I2C SLA
 
 pin_A11 = 1 #Potentiometer 
 pin_A12 = 1 #Potentiometer 
+
+{
+    "airTemp":25,
+    "outerWaterTemp":50,
+    "innerWaterTemp":50,
+    "outerTankVolume":50,
+    "innerTankVolume":50,
+    "soilTankVolume":50,
+    "humidity":0
+}

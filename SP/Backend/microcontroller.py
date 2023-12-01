@@ -4,49 +4,28 @@ from flask import jsonify, request
 @app.route('/microPOST', methods=['POST'])
 def microcontrollerPOST():
     req = request.json
+    collection = mongo.db.sensors
 
-    for sensor_type, sensor_value in req.items():
-        existing_document = mongo.db.sensors.find_one({"sensorType": sensor_type})
-        if existing_document:
-            mongo.db.sensors.update_one({"_id": existing_document["_id"]}, {"$set": {"sensorValue": sensor_value}})
-            message = f"{sensor_type} updated successfully!"
-        else:
-            mongo.db.sensors.insert_one({"sensorType": sensor_type, "sensorValue": sensor_value})
-            message = f"{sensor_type} added successfully!"
-        print(f"Processed {sensor_type}: {sensor_value}")
+    update_data = {"sensors." + sensor_type: sensor_value for sensor_type, sensor_value in req.items()}
+    collection.update_one({"_id": "sensor_states"}, {"$set": update_data}, upsert=True)
+
+    print("Processed sensors:", req)
     return jsonify({"message": "All sensors processed successfully"}), 200
+
 
 
 
 @app.route('/microGET', methods=['GET'])
 def microcontrollerGET():
-    # Query the MongoDB database for all sensor documents
-    sensors_cursor = mongo.db.sensors.find({})
+    collection = mongo.db.sensors
 
-    # Initialize an empty dictionary to store sensor data
-    sensor_values = {}
-
-    # Use count_documents to check if any documents are found
-    if mongo.db.sensors.count_documents({}) > 0:
-        for sensor in sensors_cursor:
-            # Add each sensor's data to the dictionary
-            sensor_type = sensor.get('sensorType')
-            sensor_value = sensor.get('sensorValue')
-            sensor_values[sensor_type] = sensor_value
-        
-        # Return the sensor_values dictionary directly
-        return jsonify(sensor_values), 200
+    sensor_states_doc = collection.find_one({"_id": "sensor_states"})
+    if sensor_states_doc:
+        sensor_states = sensor_states_doc.get("sensors", {})
     else:
-        # Return an error message if no data is found
-        return jsonify({"error": "No sensor data found"}), 404
+        sensor_states = {}
+
+    return jsonify(sensor_states), 200
 
 
-# {
-#     "airTemp":25,
-#     "outerWaterTemp":50,
-#     "innerWaterTemp":50,
-#     "outerTankVolume":50,
-#     "innerTankVolume":50,
-#     "soilTankVolume":50,
-#     "humidity":0
-# }
+
