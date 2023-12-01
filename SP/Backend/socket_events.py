@@ -20,10 +20,12 @@ def request_data(data):
     socketio.emit('response_data', pins_data)
 
 def update_sensor_data(sensor_data):
-    # Assuming a single document structure for sensors
     collection = mongo.db.sensors
-    update_data = {"sensors." + key: value for key, value in sensor_data.items()}
-    collection.update_one({"_id": "sensor_states"}, {"$set": update_data}, upsert=True)
+    nested_sensor_data = {key.lower().replace("temp", "_temp").replace("volume", "_volume"): value for key, value in sensor_data.items()}
+    collection.update_one({"_id": "sensor_states"}, {"$set": nested_sensor_data}, upsert=True)
+
+
+
 
 def fetch_pins_data():
     # Fetching pin data from the MongoDB database
@@ -33,6 +35,19 @@ def fetch_pins_data():
         return pin_states_doc.get("pins", {})
     else:
         return {}
+    
+# def fetch_phone_data():
+#     # Fetching pin data from the MongoDB database
+#     collection = mongo.db.sensors
+#     sensor_states_doc = collection.find_one({"_id": "sensor_states"})
+#     if sensor_states_doc:
+#         return sensor_states_doc.get("sensors", {})
+#     else:
+#         return {}
 
-
-
+# @socketio.on('request_phone_data')
+# def request_phone_data():
+#     print("Fetch the Sensor data from the database")
+#     pins_data = fetch_pins_data()
+#     print("Send the pins data to client")
+#     socketio.emit('response_data', pins_data)
