@@ -33,7 +33,6 @@ def fetch_pins_data():
         return pin_states_doc.get("pins", {})
     else:
         return {}
-    #
 
 
 
