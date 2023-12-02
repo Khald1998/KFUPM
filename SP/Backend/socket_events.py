@@ -1,5 +1,4 @@
 from app import socketio, mongo
-import random
 
 @socketio.on('connect')
 def on_connect():
@@ -9,10 +8,31 @@ def on_connect():
 def on_disconnect():
     print('Client disconnected')
 
-@socketio.on('request_random_number')
-def handle_random_number_request():
-    random_number = random.randint(0, 100)
-    socketio.emit('random_number', {'number': random_number})
+@socketio.on('request_phone_data')
+def handle_request_phone_data():
+    collection = mongo.db.sensors
+    sensor_states = collection.find_one({"_id": "sensor_states"})
+    
+    # Extracting additional data fields
+    air_temp = sensor_states['sensor_data']['air_temp']
+    humidity = sensor_states['sensor_data']['humidity']
+    outer_tank_volume = sensor_states['sensor_data']['outer_tank_volume']
+    inner_tank_volume = sensor_states['sensor_data']['inner_tank_volume']
+    inner_water_temp = sensor_states['sensor_data']['inner_water_temp']
+    outer_water_temp = sensor_states['sensor_data']['outer_water_temp']
+    soil_tank_volume = sensor_states['sensor_data']['soil_tank_volume']
+
+    # Emitting all data to the client
+    socketio.emit('phone_data', {
+        'air_temp': air_temp,
+        'humidity': humidity,
+        'outer_tank_volume': outer_tank_volume,
+        'inner_tank_volume': inner_tank_volume,
+        'inner_water_temp': inner_water_temp,
+        'outer_water_temp': outer_water_temp,
+        'soil_tank_volume' : soil_tank_volume
+    })
+
 
 
 
