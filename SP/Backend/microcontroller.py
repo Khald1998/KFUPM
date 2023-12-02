@@ -6,11 +6,14 @@ def microcontrollerPOST():
     req = request.json
     collection = mongo.db.sensors
 
-    update_data = {"sensors." + sensor_type: sensor_value for sensor_type, sensor_value in req.items()}
-    collection.update_one({"_id": "sensor_states"}, {"$set": update_data}, upsert=True)
+    # Prepare the update data with the correct key transformation and path
+    nested_sensor_data = {"sensor_data." + key.lower().replace("tank", "_tank").replace("water", "_water").replace("temp", "_temp").replace("volume", "_volume"): value for key, value in req.items()}
+    # Update the document with the nested structure
+    collection.update_one({"_id": "sensor_states"}, {"$set": nested_sensor_data}, upsert=True)
 
     print("Processed sensors:", req)
     return jsonify({"message": "All sensors processed successfully"}), 200
+
 
 
 
