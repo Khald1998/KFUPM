@@ -6,7 +6,8 @@ from flask_pymongo import PyMongo
 app = Flask(__name__)
 app.config["MONGO_URI"] = "mongodb+srv://admin:admin@cluster0.do6q5hx.mongodb.net/greenhouse?retryWrites=true&w=majority"
 mongo = PyMongo(app)
-socketio = SocketIO(app)
+# socketio = SocketIO(app)
+socketio = SocketIO(app, cors_allowed_origins='*')
 
 # Import routes and SocketIO event handlers
 from root import *

@@ -1,4 +1,5 @@
 from app import socketio, mongo
+import random
 
 @socketio.on('connect')
 def on_connect():
@@ -7,6 +8,14 @@ def on_connect():
 @socketio.on('disconnect')
 def on_disconnect():
     print('Client disconnected')
+
+@socketio.on('request_random_number')
+def handle_random_number_request():
+    random_number = random.randint(0, 100)
+    socketio.emit('random_number', {'number': random_number})
+
+
+
 
 @socketio.on('request_data')
 def request_data(data):
@@ -36,18 +45,7 @@ def fetch_pins_data():
     else:
         return {}
     
-# def fetch_phone_data():
-#     # Fetching pin data from the MongoDB database
-#     collection = mongo.db.sensors
-#     sensor_states_doc = collection.find_one({"_id": "sensor_states"})
-#     if sensor_states_doc:
-#         return sensor_states_doc.get("sensors", {})
-#     else:
-#         return {}
 
-# @socketio.on('request_phone_data')
-# def request_phone_data():
-#     print("Fetch the Sensor data from the database")
-#     pins_data = fetch_pins_data()
-#     print("Send the pins data to client")
-#     socketio.emit('response_data', pins_data)
+
+
+
