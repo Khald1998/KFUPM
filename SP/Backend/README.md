@@ -65,7 +65,7 @@ pin_A12 = 1 #Potentiometer
 
 
 {
-  "Fox Farm Liquid Nutrient": {
+  "FoxNutrient": {
     "Lettuce": 0.24,
     "Spinach": 0.49,
     "Kale": 0.505,
@@ -74,7 +74,7 @@ pin_A12 = 1 #Potentiometer
     "Cilantro": 0.385,
     "Parsley": 0.385,
     "Tomatoes": 0.84,
-    "Bell Peppers": 0.48,
+    "Peppers": 0.48,
     "Cucumbers": 0.505,
     "Zucchini": 0.505,
     "Eggplant": 0.72,
@@ -82,7 +82,7 @@ pin_A12 = 1 #Potentiometer
     "Carrots": 0.385,
     "Beets": 0.385
   },
-  "General Hydroponics Fertilizer Set": {
+  "GeneralFertilizer": {
     "Lettuce": 0.24,
     "Spinach": 0.49,
     "Kale": 0.505,
@@ -91,7 +91,7 @@ pin_A12 = 1 #Potentiometer
     "Cilantro": 0.385,
     "Parsley": 0.385,
     "Tomatoes": 0.84,
-    "Bell Peppers": 0.48,
+    "Peppers": 0.48,
     "Cucumbers": 0.505,
     "Zucchini": 0.505,
     "Eggplant": 0.72,
@@ -99,7 +99,7 @@ pin_A12 = 1 #Potentiometer
     "Carrots": 0.385,
     "Beets": 0.385
   },
-  "MasterBlend 4-18-38": {
+  "MasterBlend": {
     "Lettuce": 0.24,
     "Spinach": 0.49,
     "Kale": 0.505,
@@ -108,7 +108,7 @@ pin_A12 = 1 #Potentiometer
     "Cilantro": 0.385,
     "Parsley": 0.385,
     "Tomatoes": 0.84,
-    "Bell Peppers": 0.48,
+    "Peppers": 0.48,
     "Cucumbers": 0.505,
     "Zucchini": 0.505,
     "Eggplant": 0.72,
