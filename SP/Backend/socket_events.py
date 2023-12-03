@@ -12,8 +12,6 @@ def on_disconnect():
 def handle_request_phone_data():
     collection = mongo.db.sensors
     sensor_states = collection.find_one({"_id": "sensor_states"})
-    
-    # Extracting additional data fields
     air_temp = sensor_states['sensor_data']['air_temp']
     humidity = sensor_states['sensor_data']['humidity']
     outer_tank_volume = sensor_states['sensor_data']['outer_tank_volume']
@@ -21,8 +19,6 @@ def handle_request_phone_data():
     inner_water_temp = sensor_states['sensor_data']['inner_water_temp']
     outer_water_temp = sensor_states['sensor_data']['outer_water_temp']
     soil_tank_volume = sensor_states['sensor_data']['soil_tank_volume']
-
-    # Emitting all data to the client
     socketio.emit('phone_data', {
         'air_temp': air_temp,
         'humidity': humidity,
