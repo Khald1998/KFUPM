@@ -15,7 +15,7 @@ from disease import *
 from microcontroller import *
 from pins import *
 from socket_events import *
-
+from fertilizer import *
 
 if __name__ == '__main__':
     port = 8080

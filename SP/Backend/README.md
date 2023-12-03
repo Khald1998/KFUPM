@@ -62,3 +62,58 @@ pin_A12 = 1 #Potentiometer
     "soilTankVolume":50,
     "humidity":0
 }
+
+
+{
+  "Fox Farm Liquid Nutrient": {
+    "Lettuce": 0.24,
+    "Spinach": 0.49,
+    "Kale": 0.505,
+    "Arugula": 0.24,
+    "Mint": 0.24,
+    "Cilantro": 0.385,
+    "Parsley": 0.385,
+    "Tomatoes": 0.84,
+    "Bell Peppers": 0.48,
+    "Cucumbers": 0.505,
+    "Zucchini": 0.505,
+    "Eggplant": 0.72,
+    "Radishes": 0.455,
+    "Carrots": 0.385,
+    "Beets": 0.385
+  },
+  "General Hydroponics Fertilizer Set": {
+    "Lettuce": 0.24,
+    "Spinach": 0.49,
+    "Kale": 0.505,
+    "Arugula": 0.24,
+    "Mint": 0.24,
+    "Cilantro": 0.385,
+    "Parsley": 0.385,
+    "Tomatoes": 0.84,
+    "Bell Peppers": 0.48,
+    "Cucumbers": 0.505,
+    "Zucchini": 0.505,
+    "Eggplant": 0.72,
+    "Radishes": 0.455,
+    "Carrots": 0.385,
+    "Beets": 0.385
+  },
+  "MasterBlend 4-18-38": {
+    "Lettuce": 0.24,
+    "Spinach": 0.49,
+    "Kale": 0.505,
+    "Arugula": 0.24,
+    "Mint": 0.24,
+    "Cilantro": 0.385,
+    "Parsley": 0.385,
+    "Tomatoes": 0.84,
+    "Bell Peppers": 0.48,
+    "Cucumbers": 0.505,
+    "Zucchini": 0.505,
+    "Eggplant": 0.72,
+    "Radishes": 0.455,
+    "Carrots": 0.385,
+    "Beets": 0.385
+  }
+}
