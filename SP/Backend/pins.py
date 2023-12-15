@@ -2,6 +2,7 @@ from app import app, mongo
 from flask import jsonify, request
 
 
+
 @app.route('/pinsPOST', methods=['POST'])
 def pinsPOST():
     data = request.json
@@ -23,3 +24,5 @@ def pinsGET():
         pin_states = {}
 
     return jsonify(pin_states), 200
+
+

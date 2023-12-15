@@ -45,7 +45,7 @@ pin_A8 = 1 #LDR 1
 pin_A9 = 1 #LDR 2
 pin_A10 = 1 #LDR 3
 pin_A13 = 1 #LDR 4
-pin_A14 = 1 #LDR 5
+pin_29 = 1 #LDR 5
 
 pin_D20 = 1 #LCD I2C SDA 
 pin_D21 = 1 #LCD I2C SLA 
@@ -54,14 +54,20 @@ pin_A11 = 1 #Potentiometer
 pin_A12 = 1 #Potentiometer 
 
 {
-    "airTemp":25,
-    "outerWaterTemp":50,
-    "innerWaterTemp":50,
-    "outerTankVolume":50,
-    "innerTankVolume":50,
-    "soilTankVolume":50,
-    "humidity":0
+    "airTemp": 25,
+    "outerWaterTemp": 50,
+    "innerWaterTemp": 50,
+    "outerTankVolume": 50,
+    "innerTankVolume": 50,
+    "soilTankVolume": 50,
+    "humidity": 0,
+    "light_Top_Left": 64.1,
+    "light_Top_Right": 68.6,
+    "light_Bottom_Left": 47.2,
+    "light_Bottom_Right": 12.1,
+    "light_level": 0
 }
+
 
 
 {
