@@ -1,0 +1,77 @@
+#include <Servo.h>
+
+Servo servoX; // X-axis Servo
+Servo servoY; // Y-axis Servo
+
+int ldrUpper = A2;   // Upper LDR
+int ldrLower = A1;   // Lower LDR
+int ldrLeft = A0;    // Left LDR
+int ldrRight = A3;   // Right LDR
+
+int x = 0;
+int y = 0;
+
+void setup() {
+  Serial.begin(9600);
+  servoX.attach(9);
+  servoY.attach(10);
+  servoX.write(0); // Initial position
+  servoY.write(0);
+  delay(2500);
+  // Set LDR pins as input
+  pinMode(ldrUpper, INPUT);
+  pinMode(ldrLower, INPUT);
+  pinMode(ldrLeft, INPUT);
+  pinMode(ldrRight, INPUT);
+}
+
+// Global variable to keep track of the last time you printed
+unsigned long lastPrintTime = 0;
+
+void loop() {
+    // int valUpper = analogRead(ldrUpper);
+    // int valLower = analogRead(ldrLower);
+    // int valLeft = analogRead(ldrLeft);
+    // int valRight = analogRead(ldrRight);
+
+    // // Compare LDR values to adjust x
+    // if (valRight > valLeft) {
+    //     x++;
+    // } else if (valRight < valLeft) {
+    //     x--;
+    // }
+
+    // // Compare LDR values to adjust y
+    // if (valUpper < valLower) {
+    //     y++;
+    // } else if (valUpper > valLower) {
+    //     y--;
+    // }
+
+    // // Keep x and y within the range of 0 to 180
+    // x = constrain(x, 0, 180);
+    // y = constrain(y, 0, 180);
+
+    // servoX.write(x);
+    // servoY.write(y);
+
+    // // Check if one second has passed
+    // if (millis() - lastPrintTime >= 1000) {
+    //     // Update lastPrintTime
+    //     lastPrintTime = millis();
+
+    //     // Print the LDR values
+    //     Serial.print("Upper LDR: ");
+    //     Serial.println(valUpper);
+    //     Serial.print("Lower LDR: ");
+    //     Serial.println(valLower);
+    //     Serial.print("Left LDR: ");
+    //     Serial.println(valLeft);
+    //     Serial.print("Right LDR: ");
+    //     Serial.println(valRight);
+    // }
+    servoY.write(0);
+    servoX.write(0);
+    // y=y+1;
+    // delay(10);
+}
